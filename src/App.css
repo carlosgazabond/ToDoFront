@@ -1,38 +1,83 @@
+/* App.css */
+
+body {
+  background-color: #f0f2f5; /* Fondo claro para la aplicación */
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  padding: 20px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #ffffff; /* Fondo blanco para el contenedor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto; /* Centrado horizontal */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  width: calc(100% - 22px); /* Tamaño responsivo para el input */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #61dafb; /* Azul claro */
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background-color: #21a1f1; /* Azul más oscuro al pasar el ratón */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p {
+  background-color: #f9f9f9; /* Fondo gris claro para las notas */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p b {
+  color: #555; /* Color gris para el texto */
+}
+
+p button {
+  background-color: #ff6b6b; /* Rojo claro para el botón de borrar */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+p button:hover {
+  background-color: #e63946; /* Rojo más oscuro al pasar el ratón */
 }
