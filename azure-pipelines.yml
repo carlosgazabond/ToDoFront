@@ -11,7 +11,7 @@ variables:
   tag: 'latest'
   appName: 'PruebaDocker2'
   resourceGroup: 'pruebavm'
-  subscription: 'Deploy'
+  subscription: 'e1a8e5dc-4cb2-4221-881e-868b04135b55'
 
 steps:
 - task: Docker@2
@@ -31,21 +31,7 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: '$(subscription)'
-    scriptType: 'bash'
-    scriptPath: '$(System.DefaultWorkingDirectory)/scripts/deploy.sh'
-    arguments: '$(appName) $(resourceGroup) $(azureContainerRegistry) $(imageName) $(tag)'
-
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: '$(subscription)'
-    scriptType: 'bash'
-    scriptPath: '$(System.DefaultWorkingDirectory)/deploy.sh'
-    arguments: '$(appName) $(resourceGroup) $(azureContainerRegistry) $(imageName) $(tag)'
-
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: '$(subscription)'
+    azureSubscription: 'Azure subscription 1(e1a8e5dc-4cb2-4221-881e-868b04135b55)'
     scriptType: 'bash'
     scriptPath: '-'
     inlineScript: |
@@ -62,3 +48,4 @@ steps:
         --docker-registry-server-url https://$(azureContainerRegistry).azurecr.io \
         --docker-registry-server-user $(azureContainerRegistry) \
         --docker-registry-server-password $PASSWORD
+
