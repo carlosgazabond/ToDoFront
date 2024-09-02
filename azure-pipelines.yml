@@ -6,12 +6,11 @@ pool:
 
 variables:
   # Variables para tu registro de contenedores en Azure
-  azureContainerRegistry: 'carlosdockerregistrie.azurecr.io'
+  azureContainerRegistry: 'carlosdockerregistrie'
   imageName: 'latest'
   tag: 'latest'
   appName: 'PruebaDocker2'
   resourceGroup: 'pruebavm'
-  subscription: 'e1a8e5dc-4cb2-4221-881e-868b04135b55'
 
 steps:
 - task: Docker@2
@@ -31,9 +30,8 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Azure subscription 1(e1a8e5dc-4cb2-4221-881e-868b04135b55)'
+    azureSubscription: 'Deploy'
     scriptType: 'bash'
-    scriptPath: '-'
     inlineScript: |
       # Obtener el token de acceso para el registro de contenedores
       echo "Obteniendo el token de acceso para el registro de contenedores..."
