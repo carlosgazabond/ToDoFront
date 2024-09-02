@@ -1,0 +1,64 @@
+trigger:
+- main  # Cambia esto al nombre de tu rama principal
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # Variables para tu registro de contenedores en Azure
+  azureContainerRegistry: 'carlosdockerregistrie.azurecr.io'
+  imageName: 'latest'
+  tag: 'latest'
+  appName: 'PruebaDocker2'
+  resourceGroup: 'pruebavm'
+  subscription: 'e1a8e5dc-4cb2-4221-881e-868b04135b55'
+
+steps:
+- task: Docker@2
+  inputs:
+    command: 'build'
+    containerRegistry: '$(azureContainerRegistry)'
+    repository: '$(imageName)'
+    dockerfile: '**/Dockerfile'
+    tags: '$(tag)'
+
+- task: Docker@2
+  inputs:
+    command: 'push'
+    containerRegistry: '$(azureContainerRegistry)'
+    repository: '$(imageName)'
+    tags: '$(tag)'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '$(subscription)'
+    scriptType: 'bash'
+    scriptPath: '$(System.DefaultWorkingDirectory)/scripts/deploy.sh'
+    arguments: '$(appName) $(resourceGroup) $(azureContainerRegistry) $(imageName) $(tag)'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '$(subscription)'
+    scriptType: 'bash'
+    scriptPath: '$(System.DefaultWorkingDirectory)/deploy.sh'
+    arguments: '$(appName) $(resourceGroup) $(azureContainerRegistry) $(imageName) $(tag)'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '$(subscription)'
+    scriptType: 'bash'
+    scriptPath: '-'
+    inlineScript: |
+      # Obtener el token de acceso para el registro de contenedores
+      echo "Obteniendo el token de acceso para el registro de contenedores..."
+      PASSWORD=$(az acr credential show --name $(azureContainerRegistry) --query passwords[0].value -o tsv)
+
+      # Configurar el contenedor de la aplicación
+      echo "Configurando el contenedor en App Service..."
+      az webapp config container set \
+        --name $(appName) \
+        --resource-group $(resourceGroup) \
+        --docker-custom-image-name $(azureContainerRegistry).azurecr.io/$(imageName):$(tag) \
+        --docker-registry-server-url https://$(azureContainerRegistry).azurecr.io \
+        --docker-registry-server-user $(azureContainerRegistry) \
+        --docker-registry-server-password $PASSWORD
