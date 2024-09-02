@@ -22,8 +22,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . -t carlosdockerregistrie.azurecr.io/k8sdemo:${{ github.sha }}
+          docker build . -t carlosdockerregistrie.azurecr.io/latest:${{ github.sha }}
 
       - name: Push Docker image
         run: |
-          docker push carlosdockerregistrie.azurecr.io/k8sdemo:${{ github.sha }}
+          docker push carlosdockerregistrie.azurecr.io/latest:${{ github.sha }}
