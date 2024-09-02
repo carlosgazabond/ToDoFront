@@ -1,9 +1,7 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    branches:
-      - main  # Puedes cambiar esta rama según sea necesario
+  workflow_dispatch
 
 jobs:
   build:
