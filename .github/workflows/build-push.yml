@@ -30,3 +30,4 @@ jobs:
           build-args: |
             version=${{ steps.tag.outputs.tag }}
           tags: ${{ secrets.AZURE_URL }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}
+          
