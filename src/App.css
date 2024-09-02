@@ -69,7 +69,7 @@ p b {
 }
 
 p button {
-  background-color: #6eff6b; /* Rojo claro para el botón de borrar */
+  background-color: #ff6b6b; /* Rojo claro para el botón de borrar */
   border: none;
   border-radius: 5px;
   color: white;
